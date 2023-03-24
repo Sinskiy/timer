@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  font-family: "Comfortaa", cursive;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #232323;
+  color: white;
+  font-size: 62.5%;
+}
+
+button {
+  background-color: white;
+  border: none;
+  color: #740000;
+  margin-top: 2rem;
+  box-shadow: 0px 10px 0px #740000;
+  outline-offset: 5px;
+  font-weight: 700;
+  transition: all 0.05s;
+}
+button[data-activity=nah] {
+  box-shadow: 0px 10px 0px #919191;
+  color: #919191;
+}
+button[data-activity=nah]:hover {
+  color: #c4c4c4;
+}
+button[data-activity=nah]:focus-visible {
+  outline: 5px #919191 solid;
+}
+button:active {
+  box-shadow: none;
+  translate: 0 10px;
+}
+button:focus-visible {
+  outline: 5px #740000 solid;
+}
+button:hover {
+  color: #da0000;
+}
+
+main {
+  min-width: 100vw;
+}
+main > nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.absoluteContainer {
+  position: absolute;
+  display: flex;
+  align-self: center;
+}
+
+input {
+  background: none;
+  outline: none;
+  border: none;
+  color: white;
+  max-width: 11vw;
+  font-size: clamp(5rem, 10vw, 10rem);
+  min-height: 20rem;
+}
+
+.firstInput::-moz-placeholder {
+  text-align: right;
+}
+
+.firstInput::placeholder {
+  text-align: right;
+}
+
+.secondInput::-moz-placeholder {
+  text-align: left;
+}
+
+.secondInput::placeholder {
+  text-align: left;
+}
+
+::-moz-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 300;
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+
+::placeholder, h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 300;
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+
+.presets > button {
+  font-size: clamp(0.3rem, 3vw, 1.5rem);
+  padding: 1rem;
+}
+
+.functions {
+  display: flex;
+  min-height: 75vh;
+  align-items: end;
+}
+.functions > button {
+  font-size: clamp(0.5rem, 4vw, 3rem);
+  padding: 1rem 5rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .presets {
+    flex-wrap: wrap;
+  }
+  .presets > button {
+    margin: 1rem;
+  }
+  .functions {
+    min-height: 83vh;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .functions > button {
+    margin-top: 0;
+    min-width: 23rem;
+  }
+}
+@media screen and (max-width: 825px) {
+  .functions {
+    min-height: 70vh;
+  }
+  .functions > button {
+    min-width: 15rem;
+  }
+  input {
+    max-width: 5%;
+  }
+}
+@media screen and (max-width: 300px) {
+  .functions {
+    min-height: 50vh;
+  }
+}/*# sourceMappingURL=style.css.map */
