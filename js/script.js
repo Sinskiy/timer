@@ -1,5 +1,6 @@
 let countdown;
 let savedSeconds;
+let countFunctions;
 const buttons = document.querySelectorAll("button[data-time]");
 const time = document.querySelector("h1");
 const start = document.querySelector(".start");
@@ -12,6 +13,8 @@ const secondInput = document.querySelector(".secondInput");
 function timer(seconds) {
   clearInterval(countdown);
   savedSeconds = seconds;
+  firstInput.setAttribute("readonly", "");
+  secondInput.setAttribute("readonly", "");
 
   const now = Date.now();
   const then = now + seconds * 1000;
@@ -19,12 +22,17 @@ function timer(seconds) {
 
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
-    // check if we should stop it!
-    if (secondsLeft < 0) {
+    if (secondsLeft === 0) {
+      let audio = new Audio("./sources/alarm.mp3");
+      audio.volume = 0.3;
+      audio.play();
+      start.dataset.activity = "nah";
+      pause.dataset.activity = "nah";
+      restart.dataset.activity = "nah";
+    } else if (secondsLeft < 0) {
       clearInterval(countdown);
       return;
     }
-    // display it
     displayTimeLeft(secondsLeft);
   }, 1000);
 }
@@ -38,7 +46,8 @@ function displayTimeLeft(seconds) {
 
 function startTimer() {
   const minutes = parseFloat(firstInput.value) * 60;
-  const seconds = parseFloat(secondInput.value);
+  if (secondInput.value === "") seconds = 0;
+  else seconds = parseFloat(secondInput.value);
   const thisTime = minutes + seconds;
   if (thisTime > 0) {
     timer(thisTime);
@@ -51,6 +60,8 @@ function startTimer() {
 function pauseTimer() {
   if (pause.dataset.activity === "yep") {
     clearInterval(countdown);
+    firstInput.removeAttribute("readonly");
+    secondInput.removeAttribute("readonly");
     const minutes = parseFloat(firstInput.value) * 60;
     const seconds = parseFloat(secondInput.value);
     const thisTime = minutes + seconds;
@@ -82,12 +93,12 @@ function setTimerPreset() {
   restart.dataset.activity = "yep";
 }
 
-function inputTime(e) {
+function inputTime() {
   if (
-    firstInput.value.length === 2 &&
-    secondInput.value.length === 2 &&
-    firstInput.value.match(/\d/g) !== 0 &&
-    secondInput.value.match(/\d/g).length !== 0
+    (secondInput.value.match(/\d/g)?.length === 2 &&
+      secondInput.value.match(/\d/g).join("") !== "00") ||
+    (firstInput.value.match(/\d/g)?.length === 2 &&
+      firstInput.value.match(/\d/g).join("") !== "00")
   ) {
     start.dataset.activity = "yep";
     pause.dataset.activity = "nah";
@@ -101,3 +112,4 @@ function inputTime(e) {
 
 buttons.forEach((button) => button.addEventListener("click", setTimerPreset));
 inputs.forEach((input) => input.addEventListener("input", inputTime));
+inputs.forEach((input) => input.addEventListener("change", inputTime));

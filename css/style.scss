@@ -44,6 +44,7 @@ main {
 }
 .absoluteContainer {
     position: absolute;
+    max-width: 100%;
     display: flex;
     align-self: center;
 }
@@ -51,10 +52,16 @@ input {
     background: none;
     outline: none;
     border: none;
-    color: white;
-    max-width: 11vw;
+    max-width: clamp(7rem, 10vw, 20rem);
+    min-width: 12rem;
+    color: white;   
     font-size: clamp(5rem, 10vw, 10rem);
-    min-height: 20rem;
+}
+.firstInput {
+    padding-right: 2rem;
+}
+.secondInput {
+    padding-left: 2rem;
 }
 .firstInput::placeholder {
     text-align: right;
@@ -117,8 +124,8 @@ input {
             min-width: 15rem;
         }
     }
-    input {
-        max-width: 5%;
+    .firstInput {
+        max-width: 5vw;
     }
 }
 @media screen and (max-width: 300px) {
