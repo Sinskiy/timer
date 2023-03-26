@@ -77,6 +77,14 @@ input {
     font-weight: 300;
     font-size: clamp(5rem, 10vw, 10rem);
 }
+button.delete:hover {
+    background-color: #740000;
+    color: white;
+}
+button.deleteButton.delete {
+    background-color: #740000;
+    color: white;
+}
 
 // MAIN
 // timer presets

@@ -13,7 +13,7 @@
 </head>
 <body>
     <main>
-        <nav class="presets">
+        <nav class="presets delete">
             <button data-time="5">5</button>
             <button data-time="10">10</button>
             <button data-time="15">15</button>
@@ -21,7 +21,7 @@
             <button data-time="45">45</button>
             <button data-time="60">60</button>
             <button>+</button>
-            <button>-</button>
+            <button onclick="deleteButton()" class="deleteButton">-</button>
         </nav>
         <nav class="functions">
             <button data-activity="nah" class="start" onclick="startTimer()">start</button>

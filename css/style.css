@@ -111,6 +111,16 @@ input {
   font-size: clamp(5rem, 10vw, 10rem);
 }
 
+button.delete:hover {
+  background-color: #740000;
+  color: white;
+}
+
+button.deleteButton.delete {
+  background-color: #740000;
+  color: white;
+}
+
 .presets > button {
   font-size: clamp(0.3rem, 3vw, 1.5rem);
   padding: 1rem;

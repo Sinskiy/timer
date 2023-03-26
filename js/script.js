@@ -9,6 +9,7 @@ const restart = document.querySelector(".restart");
 const inputs = document.querySelectorAll("input");
 const firstInput = document.querySelector(".firstInput");
 const secondInput = document.querySelector(".secondInput");
+const toDeleteButton = document.querySelector(".deleteButton");
 
 function timer(seconds) {
   clearInterval(countdown);
@@ -110,6 +111,49 @@ function inputTime() {
   }
 }
 
-buttons.forEach((button) => button.addEventListener("click", setTimerPreset));
+function toDelete() {
+  this.remove();
+}
+
+function handleEvent() {
+  this.innerHTML = "❌";
+}
+
+function ifDeleteButtonClicked() {
+  console.log("ifDeleteButtonClicked");
+  if (!toDeleteButton.classList.contains("delete")) console.log("lmao");
+  else {
+    toDeleteButton.classList.remove("delete");
+    toDeleteButton.removeEventListener("click", ifDeleteButtonClicked);
+    buttons.forEach((button) => {
+      button.removeEventListener("click", toDelete);
+      button.removeEventListener(
+        "mouseout",
+        () => (button.innerHTML = button.dataset.time)
+      );
+      button.removeEventListener("mouseover", handleEvent);
+      button.removeEventListener("click", setTimerPreset);
+      button.classList.remove("delete");
+    });
+  }
+}
+
+function deleteButton() {
+  console.log("deletButton");
+  toDeleteButton.classList.add("delete");
+  buttons.forEach((button) => {
+    button.addEventListener("click", toDelete);
+    button.addEventListener("mouseover", handleEvent);
+    button.addEventListener(
+      "mouseout",
+      () => (button.innerHTML = button.dataset.time)
+    );
+    button.removeEventListener("click", setTimerPreset);
+    button.classList.add("delete");
+  });
+  toDeleteButton.addEventListener("click", ifDeleteButtonClicked);
+}
+
 inputs.forEach((input) => input.addEventListener("input", inputTime));
 inputs.forEach((input) => input.addEventListener("change", inputTime));
+buttons.forEach((button) => button.addEventListener("click", setTimerPreset));
